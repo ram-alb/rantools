@@ -6,7 +6,7 @@ authors = ["Ramil Albakov <ramil.albakov2@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.9"
 Django = "^4.2.1"
 python-dotenv = "^1.0.0"
 django-extensions = "^3.2.1"
@@ -15,6 +15,7 @@ django-extensions = "^3.2.1"
 [tool.poetry.group.dev.dependencies]
 wemake-python-styleguide = "^0.17.0"
 ipython = "^8.13.2"
+coverage = "^7.2.5"
 
 [build-system]
 requires = ["poetry-core"]
