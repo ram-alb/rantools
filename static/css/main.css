@@ -1,0 +1,66 @@
+body {
+  background: #2c2c2c;
+}
+
+/* Styles for aside panel */
+aside {
+  float: left;
+  background: #181818;
+  width: 20%;
+  padding: 2.5%;
+  height: 100vh;
+  color: #fff;
+  border-right: 5px solid #4d4d4d;
+}
+
+aside .logo-block {
+  margin-bottom: 100px;
+}
+
+aside img {
+  width: 80px;
+  float: left;
+}
+
+aside .logo {
+  font-size: 25px;
+  margin-left: 10px;
+  font-weight: bold;
+  position: relative;
+  top: +20px;
+}
+
+aside h3 {
+  margin-top: 100px;
+  font-size: 28px;
+}
+
+aside ul {
+  list-style: none;
+}
+
+aside ul li {
+  color: #fff;
+  display: block;
+  margin-top: 20px;
+  transition: transform .3s ease;
+}
+
+aside ul a {
+  text-decoration: none;
+}
+
+aside ul li:hover,
+aside ul a:hover {
+  color: #eb5959;
+  transform: scale(1.05);
+}
+
+/* Styles for .main-part div which contains block content */
+main .main-part {
+  float: left;
+  color: #fff;
+  width: 80%;
+  max-height: 100vh;
+  overflow-y: auto;
+}
