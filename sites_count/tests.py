@@ -24,10 +24,12 @@ class SitesCountViewTestCase(TestCase):
         """Set up the test environment."""
         self.client = Client()
         self.url = reverse('sites_count')
+        self.border_year = 2023
         self.past_year = 2022
         self.future_year = 2100
         self.month = 5
-        self.day = 17
+        self.day = 15
+        self.border_date = date(self.border_year, self.month, self.day)
         views.get_site_data = fake_get_site_data
 
     def test_get(self):
@@ -49,36 +51,31 @@ class SitesCountViewTestCase(TestCase):
         self.assertContains(response, '<td>Ericsson</td>')
         self.assertContains(response, '<td>50</td>')
 
-    def test_post_invalid_form_past_date(self):
+    def test_post_invalid_form(self):
         """Test post request with wrong date in the past."""
-        response = self.client.post(
-            self.url,
-            data={
+        invlaid_forms = (
+            {
                 'date': date(self.past_year, self.month, self.day),
-                'table_type': 'vendor',
+                'table_type': 'operator',
             },
-        )
-        self.assertEqual(response.status_code, HTTPStatus.OK)
-        messages = list(get_messages(response.wsgi_request))
-        self.assertEqual(len(messages), 1)
-        self.assertEqual(
-            str(messages[0]),
-            "No data before 15 May 2023",
-        )
-
-    def test_post_invalid_form_future_date(self):
-        """Test post request with wrong date in the future."""
-        response = self.client.post(
-            self.url,
-            data={
+            {
                 'date': date(self.future_year, self.month, self.day),
                 'table_type': 'vendor',
             },
         )
-        self.assertEqual(response.status_code, HTTPStatus.OK)
-        messages = list(get_messages(response.wsgi_request))
-        self.assertEqual(len(messages), 1)
-        self.assertEqual(
-            str(messages[0]),
-            "No data from the future :)",
-        )
+
+        for invalid_form in invlaid_forms:
+            response = self.client.post(self.url, data=invalid_form)
+            self.assertEqual(response.status_code, HTTPStatus.OK)
+            messages = list(get_messages(response.wsgi_request))
+            self.assertEqual(len(messages), 1)
+            if invalid_form['date'] < self.border_date:
+                self.assertEqual(
+                    str(messages[0]),
+                    "No data before 15 May 2023",
+                )
+            else:
+                self.assertEqual(
+                    str(messages[0]),
+                    "No data from the future :)",
+                )

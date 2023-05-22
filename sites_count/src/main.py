@@ -1,6 +1,6 @@
 from datetime import date
 
-from sites_count.src.handler import handle_selected_sites
+from sites_count.src.handler import handle_selected_data
 from sites_count.src.select_by_operators import select_by_operators
 from sites_count.src.select_by_regions import select_by_regions
 from sites_count.src.select_by_vendors import select_by_vendors
@@ -27,6 +27,6 @@ def get_site_data(table_type, requested_date=today):
         'region': select_by_regions,
     }
 
-    selected_sites = select_funcs[table_type](requested_date)
+    selected_data = select_funcs[table_type](requested_date)
 
-    return handle_selected_sites(selected_sites[0])
+    return handle_selected_data(selected_data[0])

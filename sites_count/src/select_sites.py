@@ -3,7 +3,7 @@ import os
 import cx_Oracle
 
 
-def select_sites(sql_command, sql_params, row_factory):
+def select(sql_command, sql_params, row_factory):
     """
     Execute a SQL query to select sites count data from the database.
 

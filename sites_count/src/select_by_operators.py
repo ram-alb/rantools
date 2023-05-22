@@ -1,6 +1,6 @@
 from collections import namedtuple
 
-from sites_count.src.select_sites import select_sites
+from sites_count.src.select_sites import select
 
 
 def select_by_operators(requested_date):
@@ -46,4 +46,4 @@ def select_by_operators(requested_date):
         'beeline_nr5g',
     ])
 
-    return select_sites(sql_command, sql_params, row_factory)
+    return select(sql_command, sql_params, row_factory)
