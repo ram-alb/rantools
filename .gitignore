@@ -13,3 +13,4 @@ htmlcov/
 *.mo
 .coverage
 env/
+network_vs_atoll/reports/
